@@ -1,13 +1,7 @@
---
--- xmonad example config file.
---
--- A template showing all available configuration hooks,
--- and how to override the defaults in your own xmonad.hs conf file.
---
--- Normally, you'd only override those defaults you care about.
---
+-- Imports
 
 import XMonad
+import XMonad.Actions.SpawnOn
 import Data.Monoid
 import System.Exit
 
@@ -214,7 +208,8 @@ myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    , resource  =? "kdesktop"       --> doIgnore
+    , manageSpawn <+> manageHook def ]
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -243,7 +238,9 @@ myLogHook = return ()
 -- per-workspace layout choices.
 --
 -- By default, do nothing.
-myStartupHook = return ()
+myStartupHook = do
+  spawnOn "1" "/usr/bin/alacritty"
+  spawnOn "4" "/usr/bin/firefox"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
