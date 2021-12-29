@@ -1,0 +1,2 @@
+#!/bin/sh
+feh --no-fehbg --bg-center '/home/functionator/.config/wallpapers/coffee-002.jpg' 
