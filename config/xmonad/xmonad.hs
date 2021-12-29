@@ -1,0 +1,1 @@
+/home/functionator/.config/xmonad/xmonad.hs
