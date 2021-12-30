@@ -210,6 +210,8 @@ myManageHook = composeAll
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore
+    , className  =? "discord"       --> doShift "3"
+    , className  =? "firefox"       --> doShift "4"
     , manageSpawn <+> manageHook def ]
 
 ------------------------------------------------------------------------
@@ -240,9 +242,9 @@ myLogHook = return ()
 --
 -- By default, do nothing.
 myStartupHook = do
+  spawnOnce "/usr/bin/picom &"
   spawnOnce "~/.fehbg &"
   spawnOn "1" "/usr/bin/alacritty"
-  spawnOn "4" "/usr/bin/firefox"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
