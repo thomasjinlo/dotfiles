@@ -1,7 +1,9 @@
--- Imports
-
+-- ===============
+-- IMPORTS
+-- ===============
 import XMonad
 import XMonad.Actions.SpawnOn
+import XMonad.Layout.Gaps
 import XMonad.Util.SpawnOnce
 import Data.Monoid
 import System.Exit
@@ -24,7 +26,7 @@ myClickJustFocuses = False
 
 -- Width of the window border in pixels.
 --
-myBorderWidth   = 1
+myBorderWidth   = 5
 
 -- modMask lets you specify which modkey you want to use. The default
 -- is mod1Mask ("left alt").  You may also consider using mod3Mask
@@ -46,8 +48,8 @@ myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#dddddd"
-myFocusedBorderColor = "#ff0000"
+myNormalBorderColor  = "#dbc1ac"
+myFocusedBorderColor = "#634832"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -176,7 +178,9 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = tiled ||| Mirror tiled ||| Full
+myLayout = gaps [(U,15)] $ tiled
+  ||| Mirror tiled
+  ||| Full
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -242,7 +246,7 @@ myLogHook = return ()
 --
 -- By default, do nothing.
 myStartupHook = do
-  spawnOnce "/usr/bin/picom &"
+  spawnOnce "/usr/local/bin/picom --experimental-backends &"
   spawnOnce "~/.fehbg &"
   spawnOn "1" "/usr/bin/alacritty"
 
