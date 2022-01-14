@@ -966,4 +966,4 @@ schemes:
       cyan:    '#87d7d7'
       white:   '#e4e4e4'
 
-colors: *seoul256
+#colors: *seoul256

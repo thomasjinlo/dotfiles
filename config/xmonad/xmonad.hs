@@ -11,6 +11,8 @@ import System.Exit
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
+import Colors
+
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
@@ -48,8 +50,8 @@ myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#dbc1ac"
-myFocusedBorderColor = "#634832"
+myNormalBorderColor  = color1
+myFocusedBorderColor = color0
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -60,7 +62,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "dmenu_run")
+    , ((modm,               xK_p     ), spawn "$HOME/.local/bin/dmen.sh")
 
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
@@ -214,6 +216,7 @@ myManageHook = composeAll
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore
+    , className  =? "Zathura"       --> doShift "2"
     , className  =? "discord"       --> doShift "3"
     , className  =? "firefox"       --> doShift "4"
     , manageSpawn <+> manageHook def ]
@@ -248,7 +251,6 @@ myLogHook = return ()
 myStartupHook = do
   spawnOnce "/usr/local/bin/picom --experimental-backends &"
   spawnOnce "~/.fehbg &"
-  spawnOn "1" "/usr/bin/alacritty"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
