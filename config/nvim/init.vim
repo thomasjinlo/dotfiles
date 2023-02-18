@@ -9,6 +9,7 @@ Plug 'rking/ag.vim'
 
 " vim color themes
 Plug 'junegunn/seoul256.vim'
+Plug 'arcticicestudio/nord-vim'
 
 " linters
 Plug 'dense-analysis/ale'
@@ -20,13 +21,15 @@ call plug#end()
 " seoul256
 " dark
 " range 233 (darkest) ~ 239 (lightest)
-let g:seoul256_background=233
-colo seoul256
+" let g:seoul256_background=233
+" colo seoul256
 
 " light
 " range 252 (darkest) ~ 256 (lightest)
 " let g:seoul256_background=256
 " colo seoul256-light
+
+colo nord
 
 if (has("termguicolors"))
   set termguicolors
@@ -80,6 +83,6 @@ set wildignore=node_modules
 " ======================================================
 " ALE
 " ======================================================
-let g:ale_linters = {
-\  'python': ['flake8']
-\}
+let g:ale_linters = {'python': ['yapf']}
+let g:ale_fixers = {'python': ['yapf']}
+let g:ale_fix_on_save = 1
